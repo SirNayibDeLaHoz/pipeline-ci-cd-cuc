@@ -1,0 +1,46 @@
+name: CI/CD Pipeline Universidad
+
+# 1. Ejecución automática al hacer push
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout de código
+      uses: actions/checkout@v4
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    # 2. Instalar dependencias
+    - name: Instalar dependencias
+      run: npm install
+
+    # 3. Ejecutar pruebas automatizadas
+    - name: Ejecutar Pruebas
+      run: npm test
+
+    # 4. Realizar el Build
+    - name: Construir aplicación (Build)
+      run: npm run build --if-present
+
+  deploy:
+    # Este trabajo depende de que 'build-and-test' termine con éxito
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Simular Despliegue Automático
+      run: |
+        echo "Conectando al servidor de producción..."
+        echo "Desplegando artefactos..."
+        echo "La aplicación ha sido desplegada exitosamente."
