@@ -1,0 +1,13 @@
+{
+  "name": "pipeline-universidad-cuc",
+  "version": "1.0.0",
+  "description": "Actividad práctica de CI/CD para la CUC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'Ejecutando pruebas unitarias...' && exit 0",
+    "build": "echo 'Compilando el proyecto...' && mkdir -p dist && echo 'Build completado' > dist/resultado.txt"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
